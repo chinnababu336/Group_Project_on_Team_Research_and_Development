@@ -19,3 +19,4 @@ Explore various aspects of US Public Assistance.
 Show trends over recent years and better understand differences across state agencies.
 Although the federal government sponsors the program and provides funding, program are administered at the state level and can widely vary.
 Indian nations (native Americans) also administer their own programs.
+
