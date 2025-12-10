@@ -11,6 +11,4 @@ food_data <- food_data %>%
   rename(
     Cumulative_Cost = matches("Cumulative", ignore.case = TRUE)
   )
-
-
 names(food_data)
