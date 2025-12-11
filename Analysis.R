@@ -159,3 +159,12 @@ long_df <- food_data %>%
   )
 four_states <- c("Colorado", "Arkansas", "Mississippi", "Wisconsin")
 box_df <- long_df %>% filter(State_Agency %in% four_states)
+# Create boxplot
+boxplot(Monthly_Cost ~ State_Agency,
+        data = box_df,
+        main = "Cumulative_Cost for Five States",
+        xlab = "State_Agencies",
+        ylab = "Monthly Food Cost (USD)",
+        las = 2,
+        cex.axis = 0.4,
+        col = rainbow(4))
