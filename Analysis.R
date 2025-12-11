@@ -48,4 +48,15 @@ cat("\nTotal number of agencies:", nrow(food_data), "\n")
 monthly_totals <- food_data %>%
   select(all_of(monthly_cols_new)) %>%
   colSums(na.rm = TRUE)
+
+# Overall statistics
+cat("\nOverall Statistics for Monthly Costs:\n")
+all_monthly_values <- unlist(food_data[, monthly_cols_new])
+all_monthly_values <- all_monthly_values[!is.na(all_monthly_values)]
+cat("Mean:", mean(all_monthly_values), "\n")
+cat("Median:", median(all_monthly_values), "\n")
+cat("Standard Deviation:", sd(all_monthly_values), "\n")
+cat("Minimum:", min(all_monthly_values), "\n")
+cat("Maximum:", max(all_monthly_values), "\n")
+
 print(monthly_totals)
