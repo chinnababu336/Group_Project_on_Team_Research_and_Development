@@ -60,3 +60,16 @@ cat("Standard Deviation:", sd(all_monthly_values), "\n")
 cat("Minimum:", min(all_monthly_values), "\n")
 cat("Maximum:", max(all_monthly_values), "\n")
 
+cat("\nADDITIONAL INSIGHTS\n")
+# Identify state agencies vs tribal organizations
+state_agencies <- food_data %>%
+  filter(!grepl("Indian|Tribal|Nation|Pueblo|Tribe|Sioux|Cherokee|Choctaw|Chickasaw|Creek|Potawatomi|Osage|Otoe|Wichita|Caddo|Delaware|Acoma|Laguna|Pueblos|Isleta|San Felipe|Santo Domingo|Zuni|Navajo|Ute|Omaha|Santee|Winnebago|Standing Rock|Three Affiliated|Cheyenne River|Rosebud|Northern Arapahoe|Shoshone|Inter-Tribal", State_Agency, ignore.case = TRUE))
+
+tribal_orgs <- food_data %>%
+  filter(grepl("Indian|Tribal|Nation|Pueblo|Tribe|Sioux|Cherokee|Choctaw|Chickasaw|Creek|Potawatomi|Osage|Otoe|Wichita|Caddo|Delaware|Acoma|Laguna|Pueblos|Isleta|San Felipe|Santo Domingo|Zuni|Navajo|Ute|Omaha|Santee|Winnebago|Standing Rock|Three Affiliated|Cheyenne River|Rosebud|Northern Arapahoe|Shoshone|Inter-Tribal",State_Agency, ignore.case = TRUE))
+
+cat("\nNumber of State Agencies:", nrow(state_agencies), "\n")
+cat("Number of Tribal Organizations:", nrow(tribal_orgs), "\n")
+
+cat("\nTotal Cost - State Agencies:", sum(state_agencies$Cumulative_Cost, na.rm = TRUE), "\n")
+cat("Total Cost - Tribal Organizations:", sum(tribal_orgs$Cumulative_Cost, na.rm = TRUE), "\n")
