@@ -112,3 +112,25 @@ hist(food_data$Cumulative_Cost,
      border = "white",
      main = "Histogram of Cumulative Cost",
      xlab = "Cumulative Cost ($)")
+
+# Plot histogram with normal curve overlay
+ggplot(food_data, aes(x = Cumulative_Cost)) +
+  geom_histogram(
+    aes(y =..density..), 
+    bins = 30,
+    color = "black", 
+    alpha = 0.7
+  ) +
+  stat_function(
+    fun = dnorm, 
+    args = list(mean = mean(food_data$Cumulative_Cost, na.rm = TRUE), 
+                sd = sd(food_data$Cumulative_Cost, na.rm = TRUE)),
+    color = "Blue", 
+    size = 1
+  ) +
+  labs(
+    title = "Histogram of Cumulative Cost with Normal Curve",
+    x = "Cumulative Cost ($)",
+    y = "Density"
+  ) +
+  theme_minimal()
