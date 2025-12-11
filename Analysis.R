@@ -85,3 +85,10 @@ cat("Percentage - Tribal Organizations:",
 theme_set(theme_minimal() + 
             theme(plot.title = element_text(hjust = 0.5, face = "bold"),
                   axis.text.x = element_text(angle = 45, hjust = 1)))
+
+# Top 10 agencies by cumulative cost
+top_10 <- food_data %>%
+  arrange(desc(Cumulative_Cost)) %>%
+  head(10) %>%
+  select(State_Agency, Cumulative_Cost)
+print(top_10)
