@@ -6,12 +6,17 @@ food_data <- read_csv("Food_Costs_2013.csv")
 
 # Knowing about the dataset
 print(names(food_data))
+print(colnames(food_data))
 
-# Identify monthly columns (Oct 2012 – Sep 2013)
+# Check for missing values
+print(colSums(is.na(food_data)))
+
+# Remove rows with all NA values in monthly columns
+# Monthly columns (excluding first and last)
 monthly_cols <- colnames(food_data)[2:13]
 
 # Drop rows where all monthly values are missing
-food_data <- food_data[rowSums(is.na(food_data[, monthly_cols])) < length(monthly_cols), ]
+food_data <- food_data[rowSums(is.na(food_data[, monthly_cols])) < length(monthly_cols),]
 
 # Remove rows where State_Agency is missing (e.g., empty Texas row)
 food_data <- food_data[!is.na(food_data$State_Agency), ]
