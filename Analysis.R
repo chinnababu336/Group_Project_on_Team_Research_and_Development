@@ -73,3 +73,10 @@ cat("Number of Tribal Organizations:", nrow(tribal_orgs), "\n")
 
 cat("\nTotal Cost - State Agencies:", sum(state_agencies$Cumulative_Cost, na.rm = TRUE), "\n")
 cat("Total Cost - Tribal Organizations:", sum(tribal_orgs$Cumulative_Cost, na.rm = TRUE), "\n")
+
+# Calculate percentage of total
+total_all <- sum(food_data$Cumulative_Cost, na.rm = TRUE)
+cat("\nPercentage - State Agencies:", 
+    round(sum(state_agencies$Cumulative_Cost, na.rm = TRUE) / total_all * 100, 2), "%\n")
+cat("Percentage - Tribal Organizations:", 
+    round(sum(tribal_orgs$Cumulative_Cost, na.rm = TRUE) / total_all * 100, 2), "%\n")
