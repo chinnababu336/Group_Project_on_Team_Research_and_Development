@@ -44,3 +44,8 @@ for(col in monthly_cols_new) {
 food_data <- food_data[!is.na(food_data$State_Agency) & food_data$State_Agency != "", ]
 cat("\nTotal number of agencies:", nrow(food_data), "\n")
 
+# Calculate total costs by month
+monthly_totals <- food_data %>%
+  select(all_of(monthly_cols_new)) %>%
+  colSums(na.rm = TRUE)
+print(monthly_totals)
