@@ -73,3 +73,64 @@ cat("Number of Tribal Organizations:", nrow(tribal_orgs), "\n")
 
 cat("\nTotal Cost - State Agencies:", sum(state_agencies$Cumulative_Cost, na.rm = TRUE), "\n")
 cat("Total Cost - Tribal Organizations:", sum(tribal_orgs$Cumulative_Cost, na.rm = TRUE), "\n")
+
+# Calculate percentage of total
+total_all <- sum(food_data$Cumulative_Cost, na.rm = TRUE)
+cat("\nPercentage - State Agencies:", 
+    round(sum(state_agencies$Cumulative_Cost, na.rm = TRUE) / total_all * 100, 2), "%\n")
+cat("Percentage - Tribal Organizations:", 
+    round(sum(tribal_orgs$Cumulative_Cost, na.rm = TRUE) / total_all * 100, 2), "%\n")
+
+# Set theme for better-looking plots
+theme_set(theme_minimal() + 
+            theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+                  axis.text.x = element_text(angle = 45, hjust = 1)))
+
+# Top 10 agencies by cumulative cost
+top_10 <- food_data %>%
+  arrange(desc(Cumulative_Cost)) %>%
+  head(10) %>%
+  select(State_Agency, Cumulative_Cost)
+print(top_10)
+
+# Plot 1: Top 10 Agencies by Cumulative Cost (Bar Chart)
+p1 <- ggplot(top_10, aes(x = reorder(State_Agency, Cumulative_Cost), y = Cumulative_Cost)) +
+  geom_bar(stat = "identity", fill = "coral", alpha = 0.7) +
+  coord_flip() +
+  labs(title = "Top 10 Agencies by Cumulative Food Cost",
+       x = "Agency",
+       y = "Cumulative Cost ($)") +
+  scale_y_continuous(labels = scales::dollar_format())
+print(p1)
+
+#Creating the Histogram
+# Disable scientific notation
+options(scipen = 999)
+hist(food_data$Cumulative_Cost,
+     breaks = 30,
+     col = "black",
+     border = "white",
+     main = "Histogram of Cumulative Cost",
+     xlab = "Cumulative Cost ($)")
+
+# Plot histogram with normal curve overlay
+ggplot(food_data, aes(x = Cumulative_Cost)) +
+  geom_histogram(
+    aes(y =..density..), 
+    bins = 30,
+    color = "black", 
+    alpha = 0.7
+  ) +
+  stat_function(
+    fun = dnorm, 
+    args = list(mean = mean(food_data$Cumulative_Cost, na.rm = TRUE), 
+                sd = sd(food_data$Cumulative_Cost, na.rm = TRUE)),
+    color = "Blue", 
+    size = 1
+  ) +
+  labs(
+    title = "Histogram of Cumulative Cost with Normal Curve",
+    x = "Cumulative Cost ($)",
+    y = "Density"
+  ) +
+  theme_minimal()
