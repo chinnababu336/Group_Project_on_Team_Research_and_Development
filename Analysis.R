@@ -39,3 +39,8 @@ monthly_cols_new <- c("Oct_2012","Nov_2012","Dec_2012",
 for(col in monthly_cols_new) {
   food_data[[col]] <- as.numeric(food_data[[col]])
 }
+
+# Remove rows where State_Agency name is empty or NA
+food_data <- food_data[!is.na(food_data$State_Agency) & food_data$State_Agency != "", ]
+cat("\nTotal number of agencies:", nrow(food_data), "\n")
+
