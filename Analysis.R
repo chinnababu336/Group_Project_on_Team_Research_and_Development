@@ -146,3 +146,14 @@ boxplot(Cumulative_Cost ~ State_Agency,
         las = 2,                 # rotate x-axis labels
         outline = TRUE,          # show outliers
         cex.axis = 0.4) 
+
+# I Selecting 5 groups on State_Agency
+# Reshape data to long format for easier analysis
+monthly_colss <- grep("201", colnames(food_data), value = TRUE)
+# Convert from wide to long format
+long_df <- food_data %>%
+  pivot_longer(
+    cols = all_of(monthly_colss),
+    names_to = "Month",
+    values_to = "Monthly_Cost"
+  )
