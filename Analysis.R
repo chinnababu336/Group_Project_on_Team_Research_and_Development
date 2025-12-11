@@ -134,3 +134,59 @@ ggplot(food_data, aes(x = Cumulative_Cost)) +
     y = "Density"
   ) +
   theme_minimal()
+
+
+# creating boxplot
+par(mar = c(7, 5, 4, 2))  # more space for x-axis labels
+boxplot(Cumulative_Cost ~ State_Agency,
+        data = food_data,
+        main = "Boxplot of Cumulative Cost by all 91 State Agency",
+        xlab = "State Agency",
+        ylab = "Cumulative Cost ($)",
+        las = 2,                 # rotate x-axis labels
+        outline = TRUE,          # show outliers
+        cex.axis = 0.4) 
+
+# I Selecting 5 groups on State_Agency
+# Reshape data to long format for easier analysis
+monthly_colss <- grep("201", colnames(food_data), value = TRUE)
+# Convert from wide to long format
+long_df <- food_data %>%
+  pivot_longer(
+    cols = all_of(monthly_colss),
+    names_to = "Month",
+    values_to = "Monthly_Cost"
+  )
+four_states <- c("Colorado", "Arkansas", "Mississippi", "Wisconsin")
+box_df <- long_df %>% filter(State_Agency %in% four_states)
+# Create boxplot
+boxplot(Monthly_Cost ~ State_Agency,
+        data = box_df,
+        main = "Cumulative_Cost for Five States",
+        xlab = "State_Agencies",
+        ylab = "Monthly Food Cost (USD)",
+        las = 2,
+        cex.axis = 0.4,
+        col = rainbow(4))
+
+# Save summary analysis to a data frame
+summary_analysis <- data.frame(
+  Metric = c("Total Agencies", "Total Cumulative Cost", "Mean Monthly Cost", 
+             "Median Monthly Cost", "SD Monthly Cost", "Min Monthly Cost", "Max Monthly Cost"),
+  Value = c(
+    nrow(food_data),
+    sum(food_data$Cumulative_Cost, na.rm = TRUE),
+    mean(all_monthly_values),
+    median(all_monthly_values),
+    sd(all_monthly_values),
+    min(all_monthly_values),
+    max(all_monthly_values)
+  )
+)
+print(summary_analysis)
+
+# Analysis part using the Wilcox text
+kruskal.test(Monthly_Cost ~ State_Agency, data = box_df)
+pairwise.wilcox.test(box_df$Monthly_Cost,
+                     box_df$State_Agency,
+                     p.adjust.method = "bonferroni")
