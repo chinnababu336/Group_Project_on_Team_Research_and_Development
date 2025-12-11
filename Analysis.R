@@ -5,7 +5,7 @@ library(tidyverse)
 food_data <- read_csv("Food_Costs_2013.csv")
 
 # Knowing about the dataset
-print(names(food_data))
+print(head(food_data))
 print(colnames(food_data))
 
 # Check for missing values
@@ -38,6 +38,3 @@ monthly_cols_new <- c("Oct_2012","Nov_2012","Dec_2012",
 for(col in monthly_cols_new) {
   food_data[[col]] <- as.numeric(food_data[[col]])
 }
-str(food_data)
-summary(food_data)
-head(food_data)
