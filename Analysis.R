@@ -157,3 +157,5 @@ long_df <- food_data %>%
     names_to = "Month",
     values_to = "Monthly_Cost"
   )
+four_states <- c("Colorado", "Arkansas", "Mississippi", "Wisconsin")
+box_df <- long_df %>% filter(State_Agency %in% four_states)
