@@ -61,7 +61,7 @@ cat("Minimum:", min(all_monthly_values), "\n")
 cat("Maximum:", max(all_monthly_values), "\n")
 
 cat("\nADDITIONAL INSIGHTS\n")
-
+# Identify state agencies vs tribal organizations
 state_agencies <- food_data %>%
   filter(!grepl("Indian|Tribal|Nation|Pueblo|Tribe|Sioux|Cherokee|Choctaw|Chickasaw|Creek|Potawatomi|Osage|Otoe|Wichita|Caddo|Delaware|Acoma|Laguna|Pueblos|Isleta|San Felipe|Santo Domingo|Zuni|Navajo|Ute|Omaha|Santee|Winnebago|Standing Rock|Three Affiliated|Cheyenne River|Rosebud|Northern Arapahoe|Shoshone|Inter-Tribal", State_Agency, ignore.case = TRUE))
 
