@@ -1,22 +1,10 @@
 # Load required library
 library(tidyverse)
 
-# 1. Load the dataset
+# Load the dataset
 food_data <- read_csv("Food_Costs_2013.csv")
 
-# Display original column names
-print(names(food_data))
-
-# Rename first column to a meaningful name
-colnames(food_data)[1] <- "State_Agency"
-
-# Standardize the cumulative cost column name
-food_data <- food_data %>%
-  rename(
-    Cumulative_Cost = matches("Cumulative", ignore.case = TRUE)
-  )
-
-# Show updated column structure
+# Knowing about the dataset
 print(names(food_data))
 
 # Identify monthly columns (Oct 2012 – Sep 2013)
