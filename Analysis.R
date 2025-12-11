@@ -80,3 +80,8 @@ cat("\nPercentage - State Agencies:",
     round(sum(state_agencies$Cumulative_Cost, na.rm = TRUE) / total_all * 100, 2), "%\n")
 cat("Percentage - Tribal Organizations:", 
     round(sum(tribal_orgs$Cumulative_Cost, na.rm = TRUE) / total_all * 100, 2), "%\n")
+
+# Set theme for better-looking plots
+theme_set(theme_minimal() + 
+            theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+                  axis.text.x = element_text(angle = 45, hjust = 1)))
