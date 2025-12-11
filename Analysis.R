@@ -19,9 +19,6 @@ monthly_cols <- colnames(food_data)[2:13]
 # Drop rows where all monthly values are missing
 food_data <- food_data[rowSums(is.na(food_data[, monthly_cols])) < length(monthly_cols),]
 
-# Handle the Texas duplicate row (row 41 is empty, row 42 has data)
-food_data <- food_data[!is.na(food_data$State_Agency), ]
-
 # Rename columns for easier handling
 colnames(food_data) <- c("State_Agency",
                          "Oct_2012","Nov_2012","Dec_2012",
@@ -29,6 +26,9 @@ colnames(food_data) <- c("State_Agency",
                          "Apr_2013","May_2013","Jun_2013",
                          "Jul_2013","Aug_2013","Sep_2013",
                          "Cumulative_Cost")
+
+# Handle the Texas duplicate row (row 41 is empty, row 42 has data)
+food_data <- food_data[!is.na(food_data$State_Agency), ]
 
 # Convert monthly columns to numeric (handle any remaining issues)
 monthly_cols_new <- c("Oct_2012","Nov_2012","Dec_2012",
