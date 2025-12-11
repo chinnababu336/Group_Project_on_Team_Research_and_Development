@@ -92,3 +92,13 @@ top_10 <- food_data %>%
   head(10) %>%
   select(State_Agency, Cumulative_Cost)
 print(top_10)
+
+# Plot 1: Top 10 Agencies by Cumulative Cost (Bar Chart)
+p1 <- ggplot(top_10, aes(x = reorder(State_Agency, Cumulative_Cost), y = Cumulative_Cost)) +
+  geom_bar(stat = "identity", fill = "coral", alpha = 0.7) +
+  coord_flip() +
+  labs(title = "Top 10 Agencies by Cumulative Food Cost",
+       x = "Agency",
+       y = "Cumulative Cost ($)") +
+  scale_y_continuous(labels = scales::dollar_format())
+print(p1)
