@@ -134,3 +134,15 @@ ggplot(food_data, aes(x = Cumulative_Cost)) +
     y = "Density"
   ) +
   theme_minimal()
+
+
+# creating boxplot
+par(mar = c(7, 5, 4, 2))  # more space for x-axis labels
+boxplot(Cumulative_Cost ~ State_Agency,
+        data = food_data,
+        main = "Boxplot of Cumulative Cost by all 91 State Agency",
+        xlab = "State Agency",
+        ylab = "Cumulative Cost ($)",
+        las = 2,                 # rotate x-axis labels
+        outline = TRUE,          # show outliers
+        cex.axis = 0.4) 
