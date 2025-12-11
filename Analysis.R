@@ -168,3 +168,19 @@ boxplot(Monthly_Cost ~ State_Agency,
         las = 2,
         cex.axis = 0.4,
         col = rainbow(4))
+
+# Save summary analysis to a data frame
+summary_analysis <- data.frame(
+  Metric = c("Total Agencies", "Total Cumulative Cost", "Mean Monthly Cost", 
+             "Median Monthly Cost", "SD Monthly Cost", "Min Monthly Cost", "Max Monthly Cost"),
+  Value = c(
+    nrow(food_data),
+    sum(food_data$Cumulative_Cost, na.rm = TRUE),
+    mean(all_monthly_values),
+    median(all_monthly_values),
+    sd(all_monthly_values),
+    min(all_monthly_values),
+    max(all_monthly_values)
+  )
+)
+print(summary_analysis)
