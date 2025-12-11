@@ -102,3 +102,13 @@ p1 <- ggplot(top_10, aes(x = reorder(State_Agency, Cumulative_Cost), y = Cumulat
        y = "Cumulative Cost ($)") +
   scale_y_continuous(labels = scales::dollar_format())
 print(p1)
+
+#Creating the Histogram
+# Disable scientific notation
+options(scipen = 999)
+hist(food_data$Cumulative_Cost,
+     breaks = 30,
+     col = "black",
+     border = "white",
+     main = "Histogram of Cumulative Cost",
+     xlab = "Cumulative Cost ($)")
