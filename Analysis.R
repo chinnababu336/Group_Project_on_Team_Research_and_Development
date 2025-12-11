@@ -39,3 +39,24 @@ monthly_cols_new <- c("Oct_2012","Nov_2012","Dec_2012",
 for(col in monthly_cols_new) {
   food_data[[col]] <- as.numeric(food_data[[col]])
 }
+
+# Remove rows where State_Agency name is empty or NA
+food_data <- food_data[!is.na(food_data$State_Agency) & food_data$State_Agency != "", ]
+cat("\nTotal number of agencies:", nrow(food_data), "\n")
+
+# Calculate total costs by month
+monthly_totals <- food_data %>%
+  select(all_of(monthly_cols_new)) %>%
+  colSums(na.rm = TRUE)
+print(monthly_totals)
+
+# Overall statistics
+cat("\nOverall Statistics for Monthly Costs:\n")
+all_monthly_values <- unlist(food_data[, monthly_cols_new])
+all_monthly_values <- all_monthly_values[!is.na(all_monthly_values)]
+cat("Mean:", mean(all_monthly_values), "\n")
+cat("Median:", median(all_monthly_values), "\n")
+cat("Standard Deviation:", sd(all_monthly_values), "\n")
+cat("Minimum:", min(all_monthly_values), "\n")
+cat("Maximum:", max(all_monthly_values), "\n")
+
