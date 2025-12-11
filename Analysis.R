@@ -184,3 +184,9 @@ summary_analysis <- data.frame(
   )
 )
 print(summary_analysis)
+
+# Analysis part using the Wilcox text
+kruskal.test(Monthly_Cost ~ State_Agency, data = box_df)
+pairwise.wilcox.test(box_df$Monthly_Cost,
+                     box_df$State_Agency,
+                     p.adjust.method = "bonferroni")
